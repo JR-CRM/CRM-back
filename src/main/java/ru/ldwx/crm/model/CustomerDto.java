@@ -4,16 +4,24 @@ import java.util.Objects;
 
 public class CustomerDto {
 
-
+    private Integer id;
     private String name;
     private String phoneNumber;
     private String email;
 
-    public CustomerDto(String name, String phoneNumber, String email) {
-
+    public CustomerDto(Integer id, String name, String phoneNumber, String email) {
+        this.id=id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,11 +53,11 @@ public class CustomerDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerDto that = (CustomerDto) o;
-        return Objects.equals(name, that.name) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phoneNumber, email);
+        return Objects.hash(id, name, phoneNumber, email);
     }
 }
