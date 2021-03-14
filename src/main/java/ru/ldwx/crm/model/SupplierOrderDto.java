@@ -1,24 +1,33 @@
 package ru.ldwx.crm.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class OrderDto {
+public class SupplierOrderDto {
     private Long id;
-    private String order;
+    private String orderNumber;
     private List<ProductDto> products;
     private Date orderDate;
-    private double orderAmount;
+    private BigDecimal orderAmount;
     private Date deliveryDate;
     private String orderComment;
 
-    public String getOrder() {
-        return order;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public List<ProductDto> getProducts() {
@@ -37,11 +46,11 @@ public class OrderDto {
         this.orderDate = orderDate;
     }
 
-    public double getOrderAmount() {
+    public BigDecimal getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(double orderAmount) {
+    public void setOrderAmount(BigDecimal orderAmount) {
         this.orderAmount = orderAmount;
     }
 
@@ -64,13 +73,16 @@ public class OrderDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderDto)) return false;
-        OrderDto orderDto = (OrderDto) o;
-        return Double.compare(orderDto.orderAmount, orderAmount) == 0 && Objects.equals(order, orderDto.order) && Objects.equals(products, orderDto.products) && Objects.equals(orderDate, orderDto.orderDate) && Objects.equals(deliveryDate, orderDto.deliveryDate) && Objects.equals(orderComment, orderDto.orderComment);
+        if (!(o instanceof SupplierOrderDto)) return false;
+        SupplierOrderDto that = (SupplierOrderDto) o;
+        return Objects.equals(id, that.id) && Objects.equals(orderNumber, that.orderNumber) &&
+                Objects.equals(products, that.products) && Objects.equals(orderDate, that.orderDate) &&
+                Objects.equals(orderAmount, that.orderAmount) && Objects.equals(deliveryDate, that.deliveryDate) &&
+                Objects.equals(orderComment, that.orderComment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(order, products, orderDate, orderAmount, deliveryDate, orderComment);
+        return Objects.hash(id, orderNumber, products, orderDate, orderAmount, deliveryDate, orderComment);
     }
 }
