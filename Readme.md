@@ -1,7 +1,14 @@
-CRM-back
+##CRM-back
 
-//TODO:
 
-// - wrote something here
 
-// - or here
+
+Set config files:
+
+via VM options:
+
+-Dspring.config.location=classpath:sql-query.properties
+
+or via program arguments:
+
+--spring.config.location=classpath:sql-query.properties
