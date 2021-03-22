@@ -12,6 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ru.ldwx.crm.data.CustomerTestData;
 import ru.ldwx.crm.model.CustomerEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,11 +53,24 @@ class CustomerRepositoryImplTest {
     }
 
     @Test
+    void getShouldBeNull() {
+        int id = 0;
+        Optional<CustomerEntity> customer = repository.get(id);
+        assertEquals(Optional.empty(), customer);
+    }
+
+    @Test
     void getByEmailShouldWork() {
         String email = "pet@mail.ru";
         Optional<CustomerEntity> customer = repository.getByEmail(email);
         assertEquals(CustomerTestData.getCustomerByEmail(), customer);
+    }
 
+    @Test
+    void getByEmailShouldBeNull() {
+        String email = "Not correct email";
+        Optional<CustomerEntity> customer = repository.getByEmail(email);
+        assertEquals(Optional.empty(), customer);
     }
 
     @Test
@@ -68,10 +82,26 @@ class CustomerRepositoryImplTest {
     }
 
     @Test
+    void findByNameShouldBeNull() {
+        String name = "No name";
+        List<CustomerEntity> nullCustomers = repository.findByName(name);
+        assertTrue(nullCustomers.isEmpty());
+        assertEquals(0, nullCustomers.size());
+    }
+
+    @Test
     void findByPhoneShouldWork() {
         String phone = "+79001582323";
         List<CustomerEntity> customers = repository.findByPhone(phone);
         assertEquals(customers.size(), 1);
         assertEquals(CustomerTestData.getCustomersByPhoneNumber(), customers);
+    }
+
+    @Test
+    void findByPhoneShouldBeNull() {
+        String phone = "Not correct phone";
+        List<CustomerEntity> nullCustomers = repository.findByPhone(phone);
+        assertTrue(nullCustomers.isEmpty());
+        assertEquals(0, nullCustomers.size());
     }
 }
