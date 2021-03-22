@@ -30,26 +30,26 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     @Override
     public Optional<CustomerEntity> get(int id) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject(getById,
+        return jdbcTemplate.query(getById,
                 new MapSqlParameterSource("id", id),
                 (rs, rowNum) -> new CustomerEntity(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("phonenumber"),
                         rs.getString("email")
-                )));
+                )).stream().findAny();
     }
 
     @Override
     public Optional<CustomerEntity> getByEmail(String email) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject(getByEmail,
+        return jdbcTemplate.query(getByEmail,
                 new MapSqlParameterSource("email", email),
                 (rs, rowNum) -> new CustomerEntity(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("phonenumber"),
                         rs.getString("email")
-                )));
+                )).stream().findAny();
     }
 
     @Override
