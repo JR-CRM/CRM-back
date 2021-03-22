@@ -30,9 +30,9 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     @Override
     public Optional<CustomerEntity> get(int id) {
-        return jdbcTemplate.queryForObject(getById,
+        return Optional.ofNullable(jdbcTemplate.queryForObject(getById,
                 new MapSqlParameterSource("id", id),
-                (rs, rowNum) -> Optional.of(new CustomerEntity(
+                (rs, rowNum) -> new CustomerEntity(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("phonenumber"),
@@ -42,9 +42,9 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     @Override
     public Optional<CustomerEntity> getByEmail(String email) {
-        return jdbcTemplate.queryForObject(getByEmail,
+        return Optional.ofNullable(jdbcTemplate.queryForObject(getByEmail,
                 new MapSqlParameterSource("email", email),
-                (rs, rowNum) -> Optional.of(new CustomerEntity(
+                (rs, rowNum) -> new CustomerEntity(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("phonenumber"),
