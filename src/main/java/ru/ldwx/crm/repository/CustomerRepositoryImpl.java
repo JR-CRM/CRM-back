@@ -19,7 +19,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     private String getByEmail;
     @Value("${select.customer.by.name}")
     private String getByName;
-    @Value("${select.customer.by.phone}")
+    @Value("${select.customer.by.phonenumber}")
     private String getByPhone;
 
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -35,7 +35,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
                 (rs, rowNum) -> Optional.of(new CustomerEntity(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("phoneNumber"),
+                        rs.getString("phonenumber"),
                         rs.getString("email")
                 )));
     }
@@ -47,7 +47,7 @@ public class CustomerRepositoryImpl implements CustomerRepository{
                 (rs, rowNum) -> Optional.of(new CustomerEntity(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("phoneNumber"),
+                        rs.getString("phonenumber"),
                         rs.getString("email")
                 )));
     }
@@ -61,9 +61,9 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
-    public List<CustomerEntity> findByPhone(String phone) {
+    public List<CustomerEntity> findByPhone(String phonenumber) {
         return jdbcTemplate.query(getByPhone,
-                new MapSqlParameterSource("phone", phone),
+                new MapSqlParameterSource("phonenumber", phonenumber),
                 new BeanPropertyRowMapper<>(CustomerEntity.class)
         );
     }
