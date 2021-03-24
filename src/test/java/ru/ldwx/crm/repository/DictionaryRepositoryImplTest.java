@@ -3,6 +3,7 @@ package ru.ldwx.crm.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
@@ -19,8 +20,10 @@ class DictionaryRepositoryImplTest {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
-
     private DictionaryRepository repository;
+
+    @Value("${get.all.statuses}")
+    private String getAllStatuses;
 
     @BeforeEach
     void init() {
