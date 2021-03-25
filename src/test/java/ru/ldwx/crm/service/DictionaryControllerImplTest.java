@@ -2,10 +2,12 @@ package ru.ldwx.crm.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.ldwx.crm.data.PersonTestData;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.ldwx.crm.data.StatusTestData;
+import ru.ldwx.crm.model.StatusDto;
 import ru.ldwx.crm.repository.DictionaryRepository;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -26,6 +28,9 @@ class DictionaryControllerImplTest {
 
     @Test
     void getAllStatuses() {
+        List<StatusDto> allStatuses = controller.getAllStatuses();
+        assertEquals(StatusTestData.getAllStatusDtos(), allStatuses);
+        assertEquals(3, allStatuses.size());
     }
 
     @Test

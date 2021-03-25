@@ -2,7 +2,6 @@ package ru.ldwx.crm.service;
 
 import org.springframework.stereotype.Service;
 import ru.ldwx.crm.model.StatusDto;
-import ru.ldwx.crm.model.StatusEntity;
 import ru.ldwx.crm.repository.DictionaryRepository;
 
 import java.util.List;

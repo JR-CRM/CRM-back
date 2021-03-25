@@ -1,12 +1,10 @@
 package ru.ldwx.crm.repository;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.ldwx.crm.model.StatusEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -25,7 +23,7 @@ public class DictionaryRepositoryImpl implements DictionaryRepository{
     public List<StatusEntity> getAllStatuses() {
         return jdbcTemplate.query(getAllStatuses,
                 (rs, rowNum) -> new StatusEntity(
-                        rs.getInt("code"),
+                        rs.getString("code"),
                         rs.getString("name")
                 ));
     }
