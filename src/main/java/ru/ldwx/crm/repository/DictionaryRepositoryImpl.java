@@ -25,8 +25,8 @@ public class DictionaryRepositoryImpl implements DictionaryRepository{
     public List<StatusEntity> getAllStatuses() {
         return jdbcTemplate.query(getAllStatuses,
                 (rs, rowNum) -> new StatusEntity(
-                        rs.getInt(1),
-                        rs.getString(2)
+                        rs.getInt("code"),
+                        rs.getString("name")
                 ));
     }
 }
