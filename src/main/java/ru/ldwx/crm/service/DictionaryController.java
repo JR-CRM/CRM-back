@@ -1,7 +1,6 @@
 package ru.ldwx.crm.service;
 
 import ru.ldwx.crm.model.StatusDto;
-import ru.ldwx.crm.model.StatusEntity;
 
 import java.util.List;
 
