@@ -1,4 +1,4 @@
 INSERT INTO dictionary (code, name)
-    VALUES (1, 'New'),
-           (2, 'In progress'),
-           (3, 'Create');
+    VALUES (1, 'Новый'),
+           (2, 'В работе'),
+           (3, 'Завершен');

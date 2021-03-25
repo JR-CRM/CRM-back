@@ -8,6 +8,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.util.ReflectionTestUtils;
+import ru.ldwx.crm.data.StatusTestData;
+import ru.ldwx.crm.model.StatusEntity;
 
 import java.util.List;
 
@@ -28,15 +31,16 @@ class DictionaryRepositoryImplTest {
     @BeforeEach
     void init() {
         repository = new DictionaryRepositoryImpl(jdbcTemplate);
+        ReflectionTestUtils.setField(repository, "getAllStatuses", getAllStatuses);
     }
 
     @Test
     void getAllStatusesShouldWork() {
+        List<StatusEntity> allStatuses = repository.getAllStatuses();
+        assertEquals(StatusTestData.getAllStatuses(), allStatuses);
     }
 
     @Test
     void getAllStatusesShouldBeNull() {
-        List<String> allStatuses = repository.getAllStatuses();
-        assertTrue(allStatuses.isEmpty());
     }
 }
