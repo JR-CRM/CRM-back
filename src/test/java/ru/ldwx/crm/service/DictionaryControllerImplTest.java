@@ -2,7 +2,6 @@ package ru.ldwx.crm.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import ru.ldwx.crm.data.StatusTestData;
 import ru.ldwx.crm.model.StatusDto;
 import ru.ldwx.crm.repository.DictionaryRepository;
