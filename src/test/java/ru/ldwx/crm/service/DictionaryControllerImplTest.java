@@ -35,5 +35,8 @@ class DictionaryControllerImplTest {
 
     @Test
     void getAllStatusFilters() {
+        List<StatusDto> allStatusFilters = controller.getAllStatusFilters();
+        assertEquals(StatusTestData.getAllStatusDtoFilters(), allStatusFilters);
+        assertEquals(4, allStatusFilters.size());
     }
 }
