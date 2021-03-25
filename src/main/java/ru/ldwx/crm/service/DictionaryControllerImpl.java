@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.ldwx.crm.model.StatusDto;
 import ru.ldwx.crm.repository.DictionaryRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,9 +27,12 @@ public class DictionaryControllerImpl implements DictionaryController {
 
     @Override
     public List<StatusDto> getAllStatusFilters() {
-        return dictionaryRepository.getAllStatuses()
+        List<StatusDto> allStatusesFilters = new ArrayList<>();
+        allStatusesFilters.add(new StatusDto("All", "Statuses"));
+        allStatusesFilters.addAll(dictionaryRepository.getAllStatuses()
                 .stream().map(status -> new StatusDto(
                         status.getCode(), status.getName()
-                )).collect(Collectors.toList());
+                )).collect(Collectors.toList()));
+        return allStatusesFilters;
     }
 }
