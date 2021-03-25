@@ -3,19 +3,19 @@ package ru.ldwx.crm.model;
 import java.util.Objects;
 
 public class StatusDto {
-    private int code;
+    private String code;
     private String name;
 
-    public StatusDto(int code, String name) {
+    public StatusDto(String code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

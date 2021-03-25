@@ -3,19 +3,19 @@ package ru.ldwx.crm.model;
 import java.util.Objects;
 
 public class StatusEntity {
-    private int code;
+    private String code;
     private String name;
 
-    public StatusEntity(int code, String name) {
+    public StatusEntity(String code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
