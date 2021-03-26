@@ -77,7 +77,15 @@ class CustomerRepositoryImplTest {
     void findByNameShouldWork() {
         String name = "Peter";
         List<CustomerEntity> customers = repository.findByName(name);
-        assertEquals(customers.size(), 1);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomersByName(), customers);
+    }
+
+    @Test
+    void findByNameShouldReturnOnTag() {
+        String tag = "ter";
+        List<CustomerEntity> customers = repository.findByName(tag);
+        assertEquals(1, customers.size());
         assertEquals(CustomerTestData.getCustomersByName(), customers);
     }
 
@@ -91,9 +99,17 @@ class CustomerRepositoryImplTest {
 
     @Test
     void findByPhoneShouldWork() {
-        String phone = "+79001582323";
+        String phone = "79001582323";
         List<CustomerEntity> customers = repository.findByPhone(phone);
-        assertEquals(customers.size(), 1);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomersByPhoneNumber(), customers);
+    }
+
+    @Test
+    void findByPhoneShouldReturnOnTag() {
+        String partOfPhone = "582323";
+        List<CustomerEntity> customers = repository.findByPhone(partOfPhone);
+        assertEquals(1, customers.size());
         assertEquals(CustomerTestData.getCustomersByPhoneNumber(), customers);
     }
 
