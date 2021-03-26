@@ -9,24 +9,18 @@ import java.util.Optional;
 public class CustomerTestData {
 
     public static Optional<CustomerEntity> getCustomerWithFirstId() {
-        return Optional.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+        return Optional.of(new CustomerEntity(1, "Peter", "79001582323", "pet@mail.ru"));
     }
 
     public static Optional<CustomerEntity> getCustomerByEmail() {
-        return Optional.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+        return Optional.of(new CustomerEntity(1, "Peter", "79001582323", "pet@mail.ru"));
     }
 
     public static List<CustomerEntity> getCustomersByName() {
-        return List.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+        return List.of(new CustomerEntity(1, "Peter", "79001582323", "pet@mail.ru"));
     }
 
     public static List<CustomerEntity> getCustomersByPhoneNumber() {
-        return List.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+        return List.of(new CustomerEntity(1, "Peter", "79001582323", "pet@mail.ru"));
     }
-
-//    public static List<PersonDto> getAllPersonDtos() {
-//        return List.of(new PersonDto(1L, "Peter", 18),
-//                new PersonDto(2L, "Vasil", 22),
-//                new PersonDto(3L, "Serg", 25));
-//    }
 }
