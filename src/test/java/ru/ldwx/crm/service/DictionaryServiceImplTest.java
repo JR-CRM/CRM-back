@@ -12,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-class DictionaryControllerImplTest {
+class DictionaryServiceImplTest {
 
-    private DictionaryController controller;
+    private DictionaryService controller;
 
     private DictionaryRepository repository;
 
     @BeforeEach
     void init() {
         repository = mock(DictionaryRepository.class);
-        controller = new DictionaryControllerImpl(repository);
+        controller = new DictionaryServiceImpl(repository);
         given(repository.getAllStatuses()).willReturn(StatusTestData.getAllStatusEntities());
     }
 

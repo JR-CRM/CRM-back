@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DictionaryControllerImpl implements DictionaryController {
+public class DictionaryServiceImpl implements DictionaryService {
 
     private DictionaryRepository dictionaryRepository;
 
-    public DictionaryControllerImpl(DictionaryRepository dictionaryRepository) {
+    public DictionaryServiceImpl(DictionaryRepository dictionaryRepository) {
         this.dictionaryRepository = dictionaryRepository;
     }
 
