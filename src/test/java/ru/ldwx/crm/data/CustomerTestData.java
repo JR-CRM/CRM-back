@@ -1,7 +1,6 @@
 package ru.ldwx.crm.data;
 
 import ru.ldwx.crm.model.CustomerEntity;
-import ru.ldwx.crm.model.PersonDto;
 
 import java.util.List;
 import java.util.Optional;
