@@ -1,7 +1,7 @@
 package ru.ldwx.crm.data;
 
+import ru.ldwx.crm.model.CustomerDto;
 import ru.ldwx.crm.model.CustomerEntity;
-import ru.ldwx.crm.model.PersonDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,9 +24,12 @@ public class CustomerTestData {
         return List.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
     }
 
-//    public static List<PersonDto> getAllPersonDtos() {
-//        return List.of(new PersonDto(1L, "Peter", 18),
-//                new PersonDto(2L, "Vasil", 22),
-//                new PersonDto(3L, "Serg", 25));
-//    }
+    public static Optional<CustomerEntity> getCustomerEntity() {
+        return Optional.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+    }
+
+    public static CustomerDto getCustomerDto() {
+        return new CustomerDto(1, "Peter", "+79001582323", "pet@mail.ru");
+    }
+
 }
