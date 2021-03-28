@@ -6,6 +6,7 @@ import ru.ldwx.crm.model.CustomerEntity;
 import ru.ldwx.crm.repository.CustomerRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -18,18 +19,26 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public CustomerDto get(int id) {
-        CustomerEntity entity = customerRepository.get(id).orElseThrow();
+        CustomerEntity entity = customerRepository.get(id).orElse(new CustomerEntity());
         return new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail());
     }
 
     @Override
     public CustomerDto getByEmail(String email) {
-        CustomerEntity entity = customerRepository.getByEmail(email).orElseThrow();
+        CustomerEntity entity = customerRepository.getByEmail(email).orElse(new CustomerEntity());
         return new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail());
     }
 
     @Override
     public List<CustomerDto> find(String query) {
-        return null;
+        List<CustomerEntity> entities;
+        if (query.matches("[0-9]+")) {
+            entities = customerRepository.findByPhone(query);
+        } else {
+            entities = customerRepository.findByName(query);
+        }
+        return entities.stream()
+                .map(entity -> new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()))
+                .collect(Collectors.toList());
     }
 }
