@@ -9,6 +9,8 @@ public class CustomerEntity {
     private String phoneNumber;
     private String email;
 
+    public CustomerEntity() {}
+
     public CustomerEntity(Integer id, String name, String phoneNumber, String email) {
         this.id = id;
         this.name = name;
