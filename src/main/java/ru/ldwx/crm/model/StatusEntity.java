@@ -32,7 +32,7 @@ public class StatusEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatusEntity that = (StatusEntity) o;
-        return code == that.code && Objects.equals(name, that.name);
+        return Objects.equals(code, that.code) && Objects.equals(name, that.name);
     }
 
     @Override
