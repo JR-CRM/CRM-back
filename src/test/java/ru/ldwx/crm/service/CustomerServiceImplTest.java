@@ -4,15 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.ldwx.crm.data.CustomerTestData;
 import ru.ldwx.crm.model.CustomerDto;
-import ru.ldwx.crm.model.CustomerEntity;
 import ru.ldwx.crm.repository.CustomerRepository;
-import ru.ldwx.crm.repository.CustomerRepositoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -61,11 +59,38 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void findShouldReturnByPhone() {
-        String phone = "+79001582323";
+    void findShouldReturnCustomerByPhone() {
+        String phone = "79001582323";
         given(customerRepository.findByPhone(phone)).willReturn(CustomerTestData.getCustomersByPhoneNumber());
         List<CustomerDto> customers = customerService.find(phone);
         verify(customerRepository).findByPhone(phone);
         assertEquals(CustomerTestData.getCustomerDto(), customers.get(0));
+    }
+
+    @Test
+    void findShouldReturnEmptyCustomerByPhone() {
+        String phone = "3333";
+        given(customerRepository.findByPhone(phone)).willReturn(new ArrayList<>());
+        List<CustomerDto> customers = customerService.find(phone);
+        verify(customerRepository).findByPhone(phone);
+        assertEquals(new ArrayList<>(), customers);
+    }
+
+    @Test
+    void findShouldReturnCustomerByName() {
+        String name = "Peter";
+        given(customerRepository.findByName(name)).willReturn(CustomerTestData.getCustomersByName());
+        List<CustomerDto> customers = customerService.find(name);
+        verify(customerRepository).findByName(name);
+        assertEquals(CustomerTestData.getCustomerDto(), customers.get(0));
+    }
+
+    @Test
+    void findShouldReturnEmptyCustomerByName() {
+        String name = "zero";
+        given(customerRepository.findByName(name)).willReturn(new ArrayList<>());
+        List<CustomerDto> customers = customerService.find(name);
+        verify(customerRepository).findByName(name);
+        assertEquals(new ArrayList<>(), customers);
     }
 }
