@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public List<CustomerDto> find(String query) {
         List<CustomerEntity> entities;
-        if (query.matches("[0-9]+")) {
+        if (query.matches("[0-9]{0,11}")) {
             entities = customerRepository.findByPhone(query);
         } else {
             entities = customerRepository.findByName(query);
