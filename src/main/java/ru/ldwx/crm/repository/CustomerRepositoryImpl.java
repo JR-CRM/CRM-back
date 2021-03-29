@@ -54,16 +54,16 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     @Override
     public List<CustomerEntity> findByName(String name) {
-        return jdbcTemplate.query(getByName,
-                new MapSqlParameterSource("name", name),
-                new BeanPropertyRowMapper<>(CustomerEntity.class)
-        );
+        return  jdbcTemplate.query(getByName,
+                new MapSqlParameterSource("name", "%" + name + "%"),
+                new BeanPropertyRowMapper<>(CustomerEntity.class));
+
     }
 
     @Override
     public List<CustomerEntity> findByPhone(String phonenumber) {
         return jdbcTemplate.query(getByPhone,
-                new MapSqlParameterSource("phonenumber", phonenumber),
+                new MapSqlParameterSource("phonenumber", "%" + phonenumber + "%"),
                 new BeanPropertyRowMapper<>(CustomerEntity.class)
         );
     }

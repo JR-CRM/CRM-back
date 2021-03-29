@@ -12,11 +12,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ru.ldwx.crm.data.CustomerTestData;
 import ru.ldwx.crm.model.CustomerEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @JdbcTest
 @TestPropertySource("classpath:sql-query.properties")
@@ -77,8 +77,32 @@ class CustomerRepositoryImplTest {
     void findByNameShouldWork() {
         String name = "Peter";
         List<CustomerEntity> customers = repository.findByName(name);
-        assertEquals(customers.size(), 1);
-        assertEquals(CustomerTestData.getCustomersByName(), customers);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomerByName(), customers);
+    }
+
+    @Test
+    void findByNameShouldReturnByTag() {
+        String nameTag = "ter";
+        List<CustomerEntity> customers = repository.findByName(nameTag);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomerByName(), customers);
+    }
+
+    @Test
+    void findByNameShouldReturnSomeCustomersByTag() {
+        String nameTag = "e";
+        List<CustomerEntity> customers = repository.findByName(nameTag);
+        assertEquals(2, customers.size());
+        assertEquals(CustomerTestData.getCustomersByNameTag(), customers);
+    }
+
+    @Test
+    void findByNameShouldReturnCustomerByTagWithUppercase() {
+        String nameTag = "P";
+        List<CustomerEntity> customers = repository.findByName(nameTag);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomerByName(), customers);
     }
 
     @Test
@@ -91,10 +115,26 @@ class CustomerRepositoryImplTest {
 
     @Test
     void findByPhoneShouldWork() {
-        String phone = "+79001582323";
+        String phone = "79001582323";
         List<CustomerEntity> customers = repository.findByPhone(phone);
-        assertEquals(customers.size(), 1);
-        assertEquals(CustomerTestData.getCustomersByPhoneNumber(), customers);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomerByPhoneNumber(), customers);
+    }
+
+    @Test
+    void findByPhoneShouldReturnByTag() {
+        String partOfPhone = "582323";
+        List<CustomerEntity> customers = repository.findByPhone(partOfPhone);
+        assertEquals(1, customers.size());
+        assertEquals(CustomerTestData.getCustomerByPhoneNumber(), customers);
+    }
+
+    @Test
+    void findByPhoneShouldReturnAllCustomersByTag() {
+        String partOfPhone = "7";
+        List<CustomerEntity> customers = repository.findByPhone(partOfPhone);
+        assertEquals(3, customers.size());
+        assertEquals(CustomerTestData.getCustomersByPhoneNumberWithTag(), customers);
     }
 
     @Test
