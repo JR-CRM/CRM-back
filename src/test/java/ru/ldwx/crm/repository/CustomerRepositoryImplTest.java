@@ -12,7 +12,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ru.ldwx.crm.data.CustomerTestData;
 import ru.ldwx.crm.model.CustomerEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

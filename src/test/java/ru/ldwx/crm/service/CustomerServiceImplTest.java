@@ -60,37 +60,37 @@ class CustomerServiceImplTest {
 
     @Test
     void findShouldReturnCustomerByPhone() {
-        String phone = "79001582323";
-        given(customerRepository.findByPhone(phone)).willReturn(CustomerTestData.getCustomersByPhoneNumber());
-        List<CustomerDto> customers = customerService.find(phone);
-        verify(customerRepository).findByPhone(phone);
+        String query = "79001582323";
+        given(customerRepository.findByPhone(query)).willReturn(CustomerTestData.getCustomersByPhoneNumber());
+        List<CustomerDto> customers = customerService.find(query);
+        verify(customerRepository).findByPhone(query);
         assertEquals(CustomerTestData.getCustomerDto(), customers.get(0));
     }
 
     @Test
     void findShouldReturnEmptyCustomerByPhone() {
-        String phone = "3333";
-        given(customerRepository.findByPhone(phone)).willReturn(new ArrayList<>());
-        List<CustomerDto> customers = customerService.find(phone);
-        verify(customerRepository).findByPhone(phone);
+        String query = "3333";
+        given(customerRepository.findByPhone(query)).willReturn(new ArrayList<>());
+        List<CustomerDto> customers = customerService.find(query);
+        verify(customerRepository).findByPhone(query);
         assertEquals(new ArrayList<>(), customers);
     }
 
     @Test
     void findShouldReturnCustomerByName() {
-        String name = "Peter";
-        given(customerRepository.findByName(name)).willReturn(CustomerTestData.getCustomersByName());
-        List<CustomerDto> customers = customerService.find(name);
-        verify(customerRepository).findByName(name);
+        String query = "Peter";
+        given(customerRepository.findByName(query)).willReturn(CustomerTestData.getCustomersByName());
+        List<CustomerDto> customers = customerService.find(query);
+        verify(customerRepository).findByName(query);
         assertEquals(CustomerTestData.getCustomerDto(), customers.get(0));
     }
 
     @Test
     void findShouldReturnEmptyCustomerByName() {
-        String name = "zero";
-        given(customerRepository.findByName(name)).willReturn(new ArrayList<>());
-        List<CustomerDto> customers = customerService.find(name);
-        verify(customerRepository).findByName(name);
+        String query = "zero";
+        given(customerRepository.findByName(query)).willReturn(new ArrayList<>());
+        List<CustomerDto> customers = customerService.find(query);
+        verify(customerRepository).findByName(query);
         assertEquals(new ArrayList<>(), customers);
     }
 }
