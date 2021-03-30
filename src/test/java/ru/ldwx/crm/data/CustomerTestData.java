@@ -30,15 +30,15 @@ public class CustomerTestData {
     }
 
     public static Optional<CustomerEntity> getCustomerEntity() {
-        return Optional.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+        return Optional.of(new CustomerEntity(1, "Peter", "79001582323", "pet@mail.ru"));
     }
 
     public static CustomerDto getCustomerDto() {
-        return new CustomerDto(1, "Peter", "+79001582323", "pet@mail.ru");
+        return new CustomerDto(1, "Peter", "79001582323", "pet@mail.ru");
     }
 
     public static List<CustomerEntity> getCustomerByQuery() {
-        return List.of(new CustomerEntity(1, "Peter", "+79001582323", "pet@mail.ru"));
+        return List.of(new CustomerEntity(1, "Peter", "79001582323", "pet@mail.ru"));
     }
 
     public static List<CustomerEntity> getCustomersByPhoneNumberWithTag() {
