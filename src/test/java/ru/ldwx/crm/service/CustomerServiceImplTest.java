@@ -61,7 +61,7 @@ class CustomerServiceImplTest {
     @Test
     void findShouldReturnCustomerByPhone() {
         String query = "79001582323";
-        given(customerRepository.findByPhone(query)).willReturn(CustomerTestData.getCustomersByPhoneNumber());
+        given(customerRepository.findByPhone(query)).willReturn(CustomerTestData.getCustomerByQuery());
         List<CustomerDto> customers = customerService.find(query);
         verify(customerRepository).findByPhone(query);
         assertEquals(CustomerTestData.getCustomerDto(), customers.get(0));
@@ -79,7 +79,7 @@ class CustomerServiceImplTest {
     @Test
     void findShouldReturnCustomerByName() {
         String query = "Peter";
-        given(customerRepository.findByName(query)).willReturn(CustomerTestData.getCustomersByName());
+        given(customerRepository.findByName(query)).willReturn(CustomerTestData.getCustomerByQuery());
         List<CustomerDto> customers = customerService.find(query);
         verify(customerRepository).findByName(query);
         assertEquals(CustomerTestData.getCustomerDto(), customers.get(0));
