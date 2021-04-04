@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order to Suppliers for test</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 240px;
+            text-align: right;
+            margin-right: 15px;
+        }
+        input, textarea {
+            width: 400px;
+        }
+        div.main {
+            /*width: 750px;*/
+        }
+        div.block {
+            width: 655px;
+            display: flex;
+            align-items: center;
+        }
+        div.button {
+            width: 655px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        div.goods {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form method="post">
+            <h1>Добавляем новый заказ к Поставщику</h1>
+            <br>
+            <div class="block">
+                <label>Номер заказа</label>
+                <input type="text" name="orderNumber" />
+            </div>
+            <br>
+            <div class="block">
+                <label>Список товара</label>
+                <textarea name="goodsList" rows="15"></textarea>
+            </div>
+            <br>
+            <div class="block">
+                <label>Дата заказа</label>
+                <input type="date" name="orderDate" />
+            </div>
+            <br>
+            <div class="block">
+                <label>Сумма заказа</label>
+                <input type="text" name="orderCost"/>
+            </div>
+            <br>
+            <div class="block">
+                <label>Планируемые сроки доставки</label>
+                <input type="date" name="deliveryDate" />
+            </div>
+            <br>
+            <div class="block">
+                <label>Комментарий к заказу</label>
+                <input type="text" name="comment">
+            </div>
+            <br>
+            <div class="button">
+                <button type="submit">Добавить</button>
+            </div>
+        </form>
+    </div>
+    <br><br>
+
+
+
+<h1>Список заказов</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Номер заказа</th>
+        <th>Список товара</th>
+        <th>Дата заказа</th>
+        <th>Сумма заказа</th>
+        <th>Планируемые сроки доставки</th>
+        <th>Комментарий</th>
+    </tr>
+    {{#order_supplier}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{orderNumber}}</td>
+        <td><div class="goods">{{goodsList}}</div></td>
+        <td>{{orderDate}}</td>
+        <td>{{orderCost}}</td>
+        <td>{{deliveryDate}}</td>
+        <td>{{comment}}</td>
+    </tr>
+    {{/order_supplier}}
+</table>
+</body>
+</html>
