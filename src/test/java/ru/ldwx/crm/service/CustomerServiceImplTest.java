@@ -7,10 +7,12 @@ import ru.ldwx.crm.model.CustomerDto;
 import ru.ldwx.crm.repository.CustomerRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -70,10 +72,10 @@ class CustomerServiceImplTest {
     @Test
     void findShouldReturnEmptyCustomerByPhone() {
         String query = "3333";
-        given(customerRepository.findByPhone(query)).willReturn(new ArrayList<>());
+        given(customerRepository.findByPhone(query)).willReturn(Collections.emptyList());
         List<CustomerDto> customers = customerService.find(query);
         verify(customerRepository).findByPhone(query);
-        assertEquals(new ArrayList<>(), customers);
+        assertTrue(customers.isEmpty());
     }
 
     @Test
@@ -88,9 +90,9 @@ class CustomerServiceImplTest {
     @Test
     void findShouldReturnEmptyCustomerByName() {
         String query = "zero";
-        given(customerRepository.findByName(query)).willReturn(new ArrayList<>());
+        given(customerRepository.findByName(query)).willReturn(Collections.emptyList());
         List<CustomerDto> customers = customerService.find(query);
         verify(customerRepository).findByName(query);
-        assertEquals(new ArrayList<>(), customers);
+        assertTrue(customers.isEmpty());
     }
 }
