@@ -29,13 +29,13 @@ class DictionaryServiceImplTest {
     void getAllStatuses() {
         List<StatusDto> allStatuses = controller.getAllStatuses();
         assertEquals(StatusTestData.getAllStatusDtos(), allStatuses);
-        assertEquals(3, allStatuses.size());
+        assertEquals(4, allStatuses.size());
     }
 
     @Test
     void getAllStatusFilters() {
         List<StatusDto> allStatusFilters = controller.getAllStatusFilters();
         assertEquals(StatusTestData.getAllStatusDtoFilters(), allStatusFilters);
-        assertEquals(4, allStatusFilters.size());
+        assertEquals(5, allStatusFilters.size());
     }
 }

@@ -38,7 +38,7 @@ class DictionaryRepositoryImplTest {
     void getAllStatusesShouldWork() {
         List<StatusEntity> allStatuses = repository.getAllStatuses();
         assertEquals(StatusTestData.getAllStatusEntities(), allStatuses);
-        assertEquals(3, allStatuses.size());
+        assertEquals(4, allStatuses.size());
     }
 
 }
