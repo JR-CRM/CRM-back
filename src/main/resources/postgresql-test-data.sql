@@ -8,8 +8,7 @@ VALUES (1, 'Peter', '79001582323', 'pet@mail.ru'),
        (3, 'Serg', '79003402023', 'serg@mail.ru');
 
 INSERT INTO dictionary (code, name)
-VALUES ('1', 'Новый'),
-       ('2', 'В работе'),
-       ('3', 'Завершен'),
-       ('4', 'Отказ')
-       ;
+VALUES ('NEW', 'Новый'),
+       ('IN_WORK', 'В работе'),
+       ('COMPLETED', 'Завершен'),
+       ('REJECTED', 'Отказ');
