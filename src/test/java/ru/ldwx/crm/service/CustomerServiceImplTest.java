@@ -1,7 +1,9 @@
 package ru.ldwx.crm.service;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import ru.ldwx.crm.data.CustomerTestData;
 import ru.ldwx.crm.model.CustomerDto;
 import ru.ldwx.crm.repository.CustomerRepository;
@@ -17,12 +19,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CustomerServiceImplTest {
 
     private CustomerService customerService;
     private CustomerRepository customerRepository;
 
-    @BeforeEach
+    @BeforeAll
     void init() {
         customerRepository = mock(CustomerRepository.class);
         customerService = new CustomerServiceImpl(customerRepository);
