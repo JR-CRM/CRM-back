@@ -42,7 +42,9 @@ public class DictionaryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("Новый")))
                 .andExpect(jsonPath("$[1].name", is("В работе")))
-                .andExpect(jsonPath("$[2].name", is("Завершен")));
+                .andExpect(jsonPath("$[2].name", is("Завершен")))
+                .andExpect(jsonPath("$[3].name", is("Отказ")))
+        ;
 
     }
 }
