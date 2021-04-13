@@ -1,5 +1,6 @@
 package ru.ldwx.crm;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +17,7 @@ import org.json.JSONObject;
  * метод getRubToUsd() - покупаем рубли за доллары у банка
  *
  * !!!МЕТОДЫ КИДАЮТ ОШИБКИ!!!
- * !!!ИНОГДА ВОЗВРАЩАЕТ null!!!
+ * !!!ИНОГДА (нерегулярно) НОВЫЙ ОБЪЕКТ ВОЗВРАЩАЕТ null!!!
  *
  * TODO: Дописать обработчик и возврат false
  *
@@ -74,7 +75,12 @@ public class TinkoffParser {
     private void getTinkoffCurrencyExchangeRates() throws Exception {
 
         String url = "https://api.tinkoff.ru/v1/currency_rates";
-        byte[] chars = new URL(url).openStream().readAllBytes();
+
+        byte[] chars;
+        try(InputStream inputStream = new URL(url).openStream()){
+            chars = inputStream.readAllBytes();
+        }
+
         JSONObject json = new JSONObject(new String(chars, StandardCharsets.UTF_8));
 
         JSONArray arr = json.getJSONObject("payload").getJSONArray("rates");
@@ -85,11 +91,9 @@ public class TinkoffParser {
             if(a.get("category").equals("DebitCardsTransfers") & a.getJSONObject("toCurrency").get("name").equals("RUB") & a.getJSONObject("fromCurrency").get("name").equals("USD")){
                 if (a.has("buy")){
                     costUsdBuy = new BigDecimal(a.get("buy").toString());
-                    //System.out.println("buy " + usdToRub);
                 }
                 if (a.has("sell")){
                     costUsdSell = new BigDecimal(a.get("sell").toString());
-                    //System.out.println("sell " + rubToUsd);
                 }
             }
         }
