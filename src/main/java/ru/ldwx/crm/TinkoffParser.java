@@ -1,13 +1,11 @@
 package ru.ldwx.crm;
 
-import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -18,7 +16,7 @@ import org.json.JSONObject;
  * метод getRubToUsd() - покупаем рубли за доллары у банка
  *
  * !!!МЕТОДЫ КИДАЮТ ОШИБКИ!!!
- * !!!НЕОБХОДИМА ИНИЦИАЛИЗАЦИЯ ПЕРЕД ИСПОЛЬЗОВАНИЕМ!!!
+ * !!!ИНОГДА ВОЗВРАЩАЕТ null!!!
  *
  * TODO: Дописать обработчик и возврат false
  *
@@ -27,77 +25,58 @@ import org.json.JSONObject;
 
 public class TinkoffParser {
 
-    private static LocalDateTime usdLastResp; //возраст курса доллара
-    private static BigDecimal usdToRub; //курс доллара
-    private static BigDecimal rubToUsd; //обратный курс
+    private static LocalDateTime lastUsdCostUpdateTime; //возраст курса доллара
+    private BigDecimal costUsdBuy; //курс доллара
+    private BigDecimal costUsdSell; //обратный курс
 
-    public static void init(){
-        usdLastResp = LocalDateTime.now();
+    public TinkoffParser() {
+        init();
+    }
+
+    private void init(){
+        lastUsdCostUpdateTime = LocalDateTime.now();
         try {
-            tinkRespUsdToRub();
+            getTinkoffCurrencyExchangeRates();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static BigDecimal getUsdToRub() throws Exception{ //возвращаем актуальный курс
-        if(!timeChecker()){
-            return usdToRub;
-        } else {
+    public BigDecimal getCostUsdBuy() throws Exception{ //возвращаем актуальный курс
+        if(timeChecker()){
             usdReNewer();
-            return usdToRub;
         }
+        return costUsdBuy;
     }
 
-    public static BigDecimal getRubToUsd() throws Exception{ //возвращаем актуальный курс
+    public BigDecimal getCostUsdSell() throws Exception{ //возвращаем актуальный курс
 
-        if(!timeChecker()){
-            return rubToUsd;
-        } else {
+        if(timeChecker()) {
             usdReNewer();
-            return rubToUsd;
         }
+        return costUsdSell;
     }
 
-    private static boolean timeChecker (){
+    private static synchronized boolean timeChecker (){
 
         LocalDateTime nowDateTime = LocalDateTime.now(); //получаем текущее время системы nowDateTime
-        Duration p = Duration.between(usdLastResp, nowDateTime); //получаем разницу между последним обновлением курса usd и текущей nowDateTime
+        Duration p = Duration.between(lastUsdCostUpdateTime, nowDateTime); //получаем разницу между последним обновлением курса usd и текущей nowDateTime
 
         return Math.abs(p.getSeconds()) > 30L; //если разница p превышает 30 секунд, то возвращаем false
     }
 
-    private static void usdReNewer () throws Exception{ //обновлятель курса доллара и его возраста
-        tinkRespUsdToRub(); //курс
-        usdLastResp = LocalDateTime.now(); //обновляем возраст
+    private void usdReNewer () throws Exception{ //обновлятель курса доллара и его возраста
+        getTinkoffCurrencyExchangeRates(); //курс
+        lastUsdCostUpdateTime = LocalDateTime.now(); //обновляем возраст
     }
 
     //Метод, запрашивающий api.tinkoff.ru, получающий и парсящий ответный JSON на предмет актуального курса доллара
+    private void getTinkoffCurrencyExchangeRates() throws Exception {
 
-    private static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            is.close();
-        }
-    }
+        String url = "https://api.tinkoff.ru/v1/currency_rates";
+        byte[] chars = new URL(url).openStream().readAllBytes();
+        JSONObject json = new JSONObject(new String(chars, StandardCharsets.UTF_8));
 
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
-
-    private static void tinkRespUsdToRub() throws Exception {
-
-        JSONObject json = readJsonFromUrl("https://api.tinkoff.ru/v1/currency_rates");
         JSONArray arr = json.getJSONObject("payload").getJSONArray("rates");
 
         for (int i = 0; i < arr.length(); i++){
@@ -105,11 +84,11 @@ public class TinkoffParser {
 
             if(a.get("category").equals("DebitCardsTransfers") & a.getJSONObject("toCurrency").get("name").equals("RUB") & a.getJSONObject("fromCurrency").get("name").equals("USD")){
                 if (a.has("buy")){
-                    usdToRub = new BigDecimal(a.get("buy").toString());
+                    costUsdBuy = new BigDecimal(a.get("buy").toString());
                     //System.out.println("buy " + usdToRub);
                 }
                 if (a.has("sell")){
-                    rubToUsd = new BigDecimal(a.get("sell").toString());
+                    costUsdSell = new BigDecimal(a.get("sell").toString());
                     //System.out.println("sell " + rubToUsd);
                 }
             }
