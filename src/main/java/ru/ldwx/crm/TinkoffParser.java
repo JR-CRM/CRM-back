@@ -36,9 +36,10 @@ public class TinkoffParser {
     }
 
     private void init(){
-        lastUsdCostUpdateTime = LocalDateTime.now();
+       
         try {
             getTinkoffCurrencyExchangeRates();
+            lastUsdCostUpdateTime = LocalDateTime.now();
         } catch (Exception e) {
             e.printStackTrace();
         }
