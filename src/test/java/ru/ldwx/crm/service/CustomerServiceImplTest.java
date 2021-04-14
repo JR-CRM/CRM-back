@@ -35,32 +35,32 @@ class CustomerServiceImplTest {
     void getShouldReturnCustomerDto() {
         int id = 1;
         given(customerRepository.get(id)).willReturn(CustomerTestData.getCustomerEntity());
-        CustomerDto customer = customerService.get(id);
-        assertEquals(CustomerTestData.getCustomerDto(), customer);
+        Optional<CustomerDto> customer = customerService.get(id);
+        assertEquals(CustomerTestData.getOptionalCustomerDto(), customer);
     }
 
     @Test
     void getShouldReturnEmptyCustomer() {
         int id = 4;
         given(customerRepository.get(id)).willReturn(Optional.empty());
-        CustomerDto emptyCustomer = customerService.get(id);
-        assertEquals(new CustomerDto(), emptyCustomer);
+        Optional<CustomerDto> emptyCustomer = customerService.get(id);
+        assertEquals(Optional.empty(), emptyCustomer);
     }
 
     @Test
     void getByEmailShouldReturnCustomerDto() {
         String email = "pet@mail.ru";
         given(customerRepository.getByEmail(email)).willReturn(CustomerTestData.getCustomerEntity());
-        CustomerDto customer = customerService.getByEmail(email);
-        assertEquals(CustomerTestData.getCustomerDto(), customer);
+        Optional<CustomerDto> customer = customerService.getByEmail(email);
+        assertEquals(CustomerTestData.getOptionalCustomerDto(), customer);
     }
 
     @Test
     void getByEmailShouldReturnEmptyCustomer() {
         String email = "pel.ru";
         given(customerRepository.getByEmail(email)).willReturn(Optional.empty());
-        CustomerDto emptyCustomer = customerService.getByEmail(email);
-        assertEquals(new CustomerDto(), emptyCustomer);
+        Optional<CustomerDto> emptyCustomer = customerService.getByEmail(email);
+        assertEquals(Optional.empty(), emptyCustomer);
     }
 
     @Test

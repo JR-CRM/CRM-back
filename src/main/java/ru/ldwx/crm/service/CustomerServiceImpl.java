@@ -6,6 +6,7 @@ import ru.ldwx.crm.model.CustomerEntity;
 import ru.ldwx.crm.repository.CustomerRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,15 +19,23 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public CustomerDto get(int id) {
-        CustomerEntity entity = customerRepository.get(id).orElse(new CustomerEntity());
-        return new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail());
+    public Optional<CustomerDto> get(int id) {
+        Optional<CustomerEntity> optional = customerRepository.get(id);
+        if (optional.isEmpty()) {
+            return Optional.empty();
+        }
+        CustomerEntity entity = optional.get();
+        return Optional.of(new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()));
     }
 
     @Override
-    public CustomerDto getByEmail(String email) {
-        CustomerEntity entity = customerRepository.getByEmail(email).orElse(new CustomerEntity());
-        return new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail());
+    public Optional<CustomerDto> getByEmail(String email) {
+        Optional<CustomerEntity> optional = customerRepository.getByEmail(email);
+        if (optional.isEmpty()) {
+            return Optional.empty();
+        }
+        CustomerEntity entity = optional.get();
+        return Optional.of(new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()));
     }
 
     @Override

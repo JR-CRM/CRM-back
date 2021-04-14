@@ -3,12 +3,13 @@ package ru.ldwx.crm.service;
 import ru.ldwx.crm.model.CustomerDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomerService {
 
-    CustomerDto get(int id);
+    Optional<CustomerDto> get(int id);
 
-    CustomerDto getByEmail(String email);
+    Optional<CustomerDto> getByEmail(String email);
 
     List<CustomerDto> find(String query);
 }
