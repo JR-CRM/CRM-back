@@ -9,6 +9,9 @@ public class CustomerDto {
     private String phoneNumber;
     private String email;
 
+    public CustomerDto() {
+    }
+
     public CustomerDto(Integer id, String name, String phoneNumber, String email) {
         this.id=id;
         this.name = name;
