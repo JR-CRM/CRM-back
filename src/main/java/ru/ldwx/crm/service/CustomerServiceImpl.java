@@ -20,22 +20,12 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Optional<CustomerDto> get(int id) {
-        Optional<CustomerEntity> optional = customerRepository.get(id);
-        if (optional.isEmpty()) {
-            return Optional.empty();
-        }
-        CustomerEntity entity = optional.get();
-        return Optional.of(new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()));
+        return customerRepository.get(id).map(entity -> new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()));
     }
 
     @Override
     public Optional<CustomerDto> getByEmail(String email) {
-        Optional<CustomerEntity> optional = customerRepository.getByEmail(email);
-        if (optional.isEmpty()) {
-            return Optional.empty();
-        }
-        CustomerEntity entity = optional.get();
-        return Optional.of(new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()));
+        return customerRepository.getByEmail(email).map(entity -> new CustomerDto(entity.getId(), entity.getName(), entity.getPhoneNumber(), entity.getEmail()));
     }
 
     @Override
