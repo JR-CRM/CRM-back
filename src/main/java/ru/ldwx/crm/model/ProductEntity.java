@@ -20,6 +20,12 @@ public class ProductEntity {
         this.quantity = quantity;
     }
 
+    public ProductEntity(String productName, String supplierLink, Double price) {
+        this.productName = productName;
+        this.supplierLink = supplierLink;
+        this.price = price;
+    }
+
     public Integer getId() {
         return id;
     }
