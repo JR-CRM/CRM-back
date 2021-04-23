@@ -1,16 +1,17 @@
 package ru.ldwx.crm.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
 public class CustomerOrderEntity {
     private List<ProductEntity> productList;
-    private Double orderTotalSum;
-    private Double paidByCustomerSum;
+    private BigDecimal orderTotalSum;
+    private BigDecimal paidByCustomerSum;
     private String comment;
 
     public CustomerOrderEntity(
-            List<ProductEntity> productList, Double orderTotalSum, Double paidByCustomerSum, String comment) {
+            List<ProductEntity> productList, BigDecimal orderTotalSum, BigDecimal paidByCustomerSum, String comment) {
         this.productList = productList;
         this.orderTotalSum = orderTotalSum;
         this.paidByCustomerSum = paidByCustomerSum;
@@ -25,19 +26,19 @@ public class CustomerOrderEntity {
         this.productList = productList;
     }
 
-    public Double getOrderTotalSum() {
+    public BigDecimal getOrderTotalSum() {
         return orderTotalSum;
     }
 
-    public void setOrderTotalSum(Double orderTotalSum) {
+    public void setOrderTotalSum(BigDecimal orderTotalSum) {
         this.orderTotalSum = orderTotalSum;
     }
 
-    public Double getPaidByCustomerSum() {
+    public BigDecimal getPaidByCustomerSum() {
         return paidByCustomerSum;
     }
 
-    public void setPaidByCustomerSum(Double paidByCustomerSum) {
+    public void setPaidByCustomerSum(BigDecimal paidByCustomerSum) {
         this.paidByCustomerSum = paidByCustomerSum;
     }
 
