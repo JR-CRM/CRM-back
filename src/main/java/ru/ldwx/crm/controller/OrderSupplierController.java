@@ -1,5 +1,6 @@
 package ru.ldwx.crm.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.ldwx.crm.model.OrderSupplierEntity;
 import ru.ldwx.crm.repository.OrderSupplierRepository;
+
+import java.time.LocalDate;
 
 /*
  *  Для тестирования, потом или удалим, или заменим на REST
@@ -37,9 +40,9 @@ public class OrderSupplierController {
     public String add(
             @RequestParam String orderNumber,
             @RequestParam String goodsList,
-            @RequestParam String orderDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate orderDate,
             @RequestParam String orderCost,
-            @RequestParam String deliveryDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate deliveryDate,
             @RequestParam String comment,
             Model model
     ) {

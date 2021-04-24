@@ -3,6 +3,7 @@ package ru.ldwx.crm.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Table("order_supplier")
@@ -11,13 +12,13 @@ public class OrderSupplierEntity {
     private @Id Long id;
     private String orderNumber;
     private String goodsList;
-    private String orderDate;
+    private LocalDate orderDate;
     private String orderCost;
-    private String deliveryDate;
+    private LocalDate deliveryDate;
     private String comment;
 
 
-    public OrderSupplierEntity(String orderNumber, String goodsList, String orderDate, String orderCost, String deliveryDate, String comment) {
+    public OrderSupplierEntity(String orderNumber, String goodsList, LocalDate orderDate, String orderCost, LocalDate deliveryDate, String comment) {
         this.orderNumber = orderNumber;
         this.goodsList = goodsList;
         this.orderDate = orderDate;

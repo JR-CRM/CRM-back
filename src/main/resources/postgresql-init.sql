@@ -24,8 +24,8 @@ CREATE TABLE order_supplier
     id  BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     order_number  VARCHAR (255),
     goods_list   TEXT,
-    order_date   VARCHAR (255),
+    order_date   DATE,
     order_cost   VARCHAR (255),
-    delivery_date    VARCHAR (255),
+    delivery_date    DATE,
     comment VARCHAR (255)
 );
