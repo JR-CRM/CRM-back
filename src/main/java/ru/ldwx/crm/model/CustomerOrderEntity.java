@@ -57,12 +57,10 @@ public class CustomerOrderEntity {
 
         CustomerOrderEntity that = (CustomerOrderEntity) o;
 
-        if (productList != null ? !productList.equals(that.productList) : that.productList != null) return false;
-        if (orderTotalSum != null ? !orderTotalSum.equals(that.orderTotalSum) : that.orderTotalSum != null)
-            return false;
-        if (paidByCustomerSum != null ? !paidByCustomerSum.equals(that.paidByCustomerSum) : that.paidByCustomerSum != null)
-            return false;
-        return comment != null ? comment.equals(that.comment) : that.comment == null;
+        return Objects.equals(productList, that.productList) &&
+                Objects.equals(orderTotalSum, that.orderTotalSum) &&
+                Objects.equals(paidByCustomerSum, that.paidByCustomerSum) &&
+                Objects.equals(comment, that.comment);
     }
 
     @Override
