@@ -1,5 +1,6 @@
 package ru.ldwx.crm.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ProductEntity {
@@ -8,16 +9,22 @@ public class ProductEntity {
     private String productNumber;
     private String productName;
     private String supplierLink;
-    private Double price;
+    private BigDecimal price;
     private Integer quantity;
 
-    public ProductEntity(Integer id, String productNumber, String productName, String supplierLink, Double price, Integer quantity) {
+    public ProductEntity(Integer id, String productNumber, String productName, String supplierLink, BigDecimal price, Integer quantity) {
         this.id = id;
         this.productNumber = productNumber;
         this.productName = productName;
         this.supplierLink = supplierLink;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public ProductEntity(String productName, String supplierLink, BigDecimal price) {
+        this.productName = productName;
+        this.supplierLink = supplierLink;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -52,11 +59,11 @@ public class ProductEntity {
         this.supplierLink = supplierLink;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
